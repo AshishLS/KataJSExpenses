@@ -84,11 +84,16 @@ class ExpenseFactory {
     }
 }
 
+function printInHTML(message) {
+    console.log(message);
+    document.getElementById("messageDiv").innerHTML += "<br>" + message;
+}
+
 function printReportImproved(expenses) {
     let total = 0;
     let mealExpenses = 0;
 
-    console.log("Expenses " + new Date().toISOString().slice(0, 10) + "\n");
+    printInHTML("Expenses " + new Date().toISOString().slice(0, 10) + "\n");
 
     for (const expense of expenses) {
         if (expense.isMealExpense) {
@@ -97,10 +102,11 @@ function printReportImproved(expenses) {
 
         const mealOverExpensesMarker = expense.isOverExpensive() ? "X" : " ";
 
-        console.log(expense.name + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+        printInHTML(expense.name + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
         total += expense.amount;
     }
 
-    console.log("Meal expenses: " + mealExpenses);
-    console.log("Total expenses: " + total);
+    printInHTML("Meal expenses: " + mealExpenses);
+    printInHTML("Total expenses: " + total);
+    printInHTML("Done");
 }
