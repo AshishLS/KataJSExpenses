@@ -2,6 +2,9 @@
 
 class Expense {
     constructor(amount) {
+        if (this.constructor === Expense) {
+            throw new Error("Abstract classes can't be instantiated.");
+        }
         this.amount = amount;
         this.name = "";
         this.isMealExpense = false;
@@ -31,7 +34,7 @@ class DinnerExpense extends Expense {
 class LunchExpense extends Expense {
     constructor(amount) {
         super(amount);
-        this.name =ExpenseConfig.Lunch.name;
+        this.name = ExpenseConfig.Lunch.name;
         this.overExpenseLimit = ExpenseConfig.Lunch.overExpenseLimit;
         this.isMealExpense = true;
     }
@@ -63,31 +66,6 @@ class CarwashExpense extends Expense {
         super(amount);
         this.name = ExpenseConfig.Carwash.name;
         this.isMealExpense = false;
-    }
-}
-
-class ExpenseFactory {
-    static createExpense(type, amount) {
-        let expense = null;
-        switch (type) {
-            case Type.DINNER:
-                expense = new DinnerExpense(amount);
-                break;
-            case Type.BREAKFAST:
-                expense = new BreakfastExpense(amount);
-                break;
-            case Type.LUNCH:
-                expense = new LunchExpense(amount);
-                break;
-            case Type.CARWASH:
-                expense = new CarwashExpense(amount);
-                break;
-            default:
-                alert("This Type of Expense is not defined");
-
-        }
-
-        return expense;
     }
 }
 
