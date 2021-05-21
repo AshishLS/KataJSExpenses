@@ -1,8 +1,4 @@
-const Type = {
-    BREAKFAST: 1,
-    LUNCH: 2,
-    DINNER: 3,
-};
+
 
 class Expense {
     constructor(amount) {
@@ -20,9 +16,9 @@ class Expense {
 class DinnerExpense extends Expense {
     constructor(amount) {
         super(amount);
-        this.name = "Dinner";
+        this.name = ExpenseConfig.Dinner.name;
+        this.overExpenseLimit = ExpenseConfig.Dinner.overExpenseLimit;;
         this.isMealExpense = true;
-        this.overExpenseLimit = 5000;
     }
 
     isOverExpensive() {
@@ -35,9 +31,9 @@ class DinnerExpense extends Expense {
 class LunchExpense extends Expense {
     constructor(amount) {
         super(amount);
-        this.name = "Lunch";
+        this.name =ExpenseConfig.Lunch.name;
+        this.overExpenseLimit = ExpenseConfig.Lunch.overExpenseLimit;
         this.isMealExpense = true;
-        this.overExpenseLimit = 5000;
     }
 
     isOverExpensive() {
@@ -50,15 +46,23 @@ class LunchExpense extends Expense {
 class BreakfastExpense extends Expense {
     constructor(amount) {
         super(amount);
-        this.name = "Breakfast";
+        this.name = ExpenseConfig.Breakfast.name;
+        this.overExpenseLimit = ExpenseConfig.Breakfast.overExpenseLimit;
         this.isMealExpense = true;
-        this.overExpenseLimit = 5000;
     }
 
     isOverExpensive() {
         if (this.amount > this.overExpenseLimit) {
             return true;
         }
+    }
+}
+
+class CarwashExpense extends Expense {
+    constructor(amount) {
+        super(amount);
+        this.name = ExpenseConfig.Carwash.name;
+        this.isMealExpense = false;
     }
 }
 
@@ -75,6 +79,9 @@ class ExpenseFactory {
             case Type.LUNCH:
                 expense = new LunchExpense(amount);
                 break;
+            case Type.CARWASH:
+                expense = new CarwashExpense(amount);
+                break;
             default:
                 alert("This Type of Expense is not defined");
 
@@ -84,29 +91,3 @@ class ExpenseFactory {
     }
 }
 
-function printInHTML(message) {
-    console.log(message);
-    document.getElementById("messageDiv").innerHTML += "<br>" + message;
-}
-
-function printReportImproved(expenses) {
-    let total = 0;
-    let mealExpenses = 0;
-
-    printInHTML("Expenses " + new Date().toISOString().slice(0, 10) + "\n");
-
-    for (const expense of expenses) {
-        if (expense.isMealExpense) {
-            mealExpenses += expense.amount;
-        }
-
-        const mealOverExpensesMarker = expense.isOverExpensive() ? "X" : " ";
-
-        printInHTML(expense.name + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-        total += expense.amount;
-    }
-
-    printInHTML("Meal expenses: " + mealExpenses);
-    printInHTML("Total expenses: " + total);
-    printInHTML("Done");
-}

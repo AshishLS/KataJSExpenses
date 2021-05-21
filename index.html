@@ -2,6 +2,7 @@
 
 <head>
     <!-- <script src = "Expenses.js"></script> -->
+    <script src="ImprovedExpenses/Config.js"></script>
     <script src="ImprovedExpenses/Expenses.js"></script>
     <script src="ImprovedExpenses/ProcessExpenses.js"></script>
 </head>
@@ -9,7 +10,8 @@
 <script>
     let expenses = [ExpenseFactory.createExpense(Type.BREAKFAST, 6000),
                     ExpenseFactory.createExpense(Type.LUNCH, 2000),
-                    ExpenseFactory.createExpense(Type.DINNER, 4000),];
+                    ExpenseFactory.createExpense(Type.DINNER, 4000),
+                    ExpenseFactory.createExpense(Type.CARWASH, 2000),];
     printReportImproved(expenses);
 
 </script>
