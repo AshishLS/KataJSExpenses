@@ -3,11 +3,16 @@ function printInHTML(message) {
     document.getElementById("messageDiv").innerHTML += "<br>" + message;
 }
 
-function printReportImproved(expenses) {
+function printReport(expenses, date) {
     let total = 0;
     let mealExpenses = 0;
+    let timestamp = "";
+    if (date != undefined)
+        timestamp = date;
+    else
+        timestamp = new Date().toISOString().slice(0, 10);
 
-    printInHTML("Expenses " + new Date().toISOString().slice(0, 10) + "\n");
+    printInHTML("Expenses " + timestamp)
 
     for (const expense of expenses) {
         if (expense.isMealExpense) {
@@ -22,5 +27,4 @@ function printReportImproved(expenses) {
 
     printInHTML("Meal expenses: " + mealExpenses);
     printInHTML("Total expenses: " + total);
-    printInHTML("Done");
 }

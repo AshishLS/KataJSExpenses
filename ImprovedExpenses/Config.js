@@ -13,5 +13,5 @@ ExpenseConfig = {
 }
 
 function changeConfig(){
-
+    throw new Error("Not yet implemented");
 }
